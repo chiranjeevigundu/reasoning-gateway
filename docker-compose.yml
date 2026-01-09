@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      # host.docker.internal allows connection to the 'upstream' running on the host machine
+      - UPSTREAM_URL=http://host.docker.internal:8001/chat/completions
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
